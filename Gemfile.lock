@@ -1,4 +1,12 @@
 GIT
+  remote: https://github.com/bjfish/mini_racer.git
+  revision: f5204fd6cbf4c37ef9db18ab7274e8885b09fe37
+  branch: truffleruby
+  specs:
+    mini_racer (0.6.2)
+      libv8-node (~> 16.10.0.0)
+
+GIT
   remote: https://github.com/discourse/mail.git
   revision: 5b700fc95ee66378e0cf2559abc73c8bc3062a4b
   specs:
@@ -242,8 +250,6 @@ GEM
     method_source (1.0.0)
     mini_mime (1.1.2)
     mini_portile2 (2.8.0)
-    mini_racer (0.6.2)
-      libv8-node (~> 16.10.0.0)
     mini_scheduler (0.14.0)
       sidekiq (>= 4.2.3)
     mini_sql (1.4.0)
@@ -574,7 +580,7 @@ DEPENDENCIES
   memory_profiler
   message_bus
   mini_mime
-  mini_racer
+  mini_racer!
   mini_scheduler
   mini_sql
   mini_suffix
@@ -643,4 +649,4 @@ DEPENDENCIES
   yaml-lint
 
 BUNDLED WITH
-   2.3.18
+   2.3.16

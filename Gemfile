@@ -111,7 +111,7 @@ gem 'oj', '3.13.14'
 gem 'pg'
 gem 'mini_sql'
 gem 'pry-rails', require: false
-gem 'pry-byebug', require: false
+gem 'pry-byebug', require: false, platform: :mri
 gem 'r2', require: false
 gem 'rake'
 
@@ -122,7 +122,7 @@ gem 'sidekiq'
 gem 'mini_scheduler'
 
 gem 'execjs', require: false
-gem 'mini_racer'
+gem 'mini_racer', git: 'https://github.com/bjfish/mini_racer.git', branch: 'truffleruby'
 
 gem 'highline', require: false
 
