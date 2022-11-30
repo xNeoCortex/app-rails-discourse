@@ -2708,7 +2708,7 @@ en:
       If you want to continue receiving email updates, you may ignore this email.
 
   invite_mailer:
-    title: "Invite Mailer"
+    title: "Invite to Topic"
     subject_template: "%{inviter_name} invited you to '%{topic_title}' on %{site_domain_name}"
     text_body_template: |
       %{inviter_name} invited you to a discussion
@@ -2726,7 +2726,7 @@ en:
       %{invite_link}
 
   custom_invite_mailer:
-    title: "Custom Invite Mailer"
+    title: "Custom Invite to Topic"
     subject_template: "%{inviter_name} invited you to '%{topic_title}' on %{site_domain_name}"
     text_body_template: |
       %{inviter_name} invited you to a discussion
@@ -2748,7 +2748,7 @@ en:
       %{invite_link}
 
   invite_forum_mailer:
-    title: "Invite Forum Mailer"
+    title: "Invite to Forum"
     subject_template: "%{inviter_name} invited you to join %{site_domain_name}"
     text_body_template: |
       %{inviter_name} invited you to join
@@ -2762,7 +2762,7 @@ en:
       %{invite_link}
 
   custom_invite_forum_mailer:
-    title: "Custom Invite Forum Mailer"
+    title: "Custom Invite to Forum"
     subject_template: "%{inviter_name} invited you to join %{site_domain_name}"
     text_body_template: |
       %{inviter_name} invited you to join
@@ -2811,7 +2811,7 @@ en:
       [Confirm Administrator Account](%{admin_confirm_url})
 
   test_mailer:
-    title: "Test Mailer"
+    title: "Email Deliverability Test "
     subject_template: "[%{email_prefix}] Email Deliverability Test"
     text_body_template: |
       This is a test email from
@@ -2830,7 +2830,7 @@ en:
       [1]: https://meta.discourse.org/t/email-delivery-configuration-checklist/209839
 
   new_version_mailer:
-    title: "New Version Mailer"
+    title: "New Version Notification"
     subject_template: "[%{email_prefix}] New Discourse version, update available"
     text_body_template: |
       Hooray, a new version of [Discourse](https://www.discourse.org) is available!
@@ -2845,7 +2845,7 @@ en:
       - Visit [meta.discourse.org](https://meta.discourse.org) for news, discussion, and support for Discourse
 
   new_version_mailer_with_notes:
-    title: "New Version Mailer with Notes"
+    title: "New Version Notification with Notes"
     subject_template: "[%{email_prefix}] update available"
     text_body_template: |
       Hooray, a new version of [Discourse](https://www.discourse.org) is available!
@@ -3008,7 +3008,7 @@ en:
         As you participate here, we’ll get to know you, and temporary new user limitations will be lifted. Over time you’ll gain [trust levels](https://blog.discourse.org/2018/06/understanding-discourse-trust-levels/) that include special abilities to help us manage our community together.
 
     welcome_user:
-      title: "Welcome User"
+      title: "Welcome Message for User"
       subject_template: "Welcome to %{site_name}!"
       text_body_template: |
         Thanks for joining %{site_name}, and welcome!
@@ -3020,7 +3020,6 @@ en:
         Enjoy your stay!
 
     welcome_tl1_user:
-      title: "Welcome TL1 User"
       subject_template: "Thanks for spending time with us"
       text_body_template: |
         Hey there. We see you’ve been busy reading, which is fantastic, so we’ve promoted you up a [trust level!](https://blog.discourse.org/2018/06/understanding-discourse-trust-levels/)
@@ -3028,7 +3027,7 @@ en:
         We’re really glad you’re spending time with us and we’d love to know more about you. Take a moment to [fill out your profile](%{base_url}/my/preferences/profile), or feel free to [start a new topic](%{base_url}/categories).
 
     welcome_staff:
-      title: "Welcome Staff"
+      title: "Welcome Message for Staff"
       subject_template: "Congratulations, you’ve been granted %{role} status!"
       text_body_template: |
         You’ve been granted %{role} status by a fellow staff member.
@@ -3037,7 +3036,7 @@ en:
 
         With great power comes great responsibility. If you’re new to moderating, please refer to the [Moderation Guide](https://meta.discourse.org/t/discourse-moderation-guide/63116).
     welcome_invite:
-      title: "Welcome Invite"
+      title: "Welcome Message after Invite"
       subject_template: "Welcome to %{site_name}!"
       text_body_template: |
         Thanks for accepting your invitation to %{site_name} -- welcome!
@@ -3158,7 +3157,7 @@ en:
       text_body_template: "We're sorry, but your data export failed. Please check the logs or [contact a staff member](%{base_url}/about)."
 
     email_reject_insufficient_trust_level:
-      title: "Email Reject insufficient Trust Level"
+      title: "Email Reject: Insufficient Trust Level"
       subject_template: "[%{email_prefix}] Email issue -- Insufficient Trust Level"
       text_body_template: |
         We're sorry, but your email message to %{destination} (titled %{former_title}) didn't work.
@@ -3166,7 +3165,7 @@ en:
         Your account does not have the required trust level to post new topics to this email address. If you believe this is an error, [contact a staff member](%{base_url}/about).
 
     email_reject_user_not_found:
-      title: "Email Reject User Not Found"
+      title: "Email Reject: User Not Found"
       subject_template: "[%{email_prefix}] Email issue -- User Not Found"
       text_body_template: |
         We're sorry, but your email message to %{destination} (titled %{former_title}) didn't work.
@@ -3174,7 +3173,7 @@ en:
         Your reply was sent from an unknown email address. Try sending from another email address, or [contact a staff member](%{base_url}/about).
 
     email_reject_screened_email:
-      title: "Email Reject Screened Email"
+      title: "Email Reject: Screened Email"
       subject_template: "[%{email_prefix}] Email issue -- Blocked Email"
       text_body_template: |
         We're sorry, but your email message to %{destination} (titled %{former_title}) didn't work.
@@ -3182,7 +3181,7 @@ en:
         Your reply was sent from a blocked email address. Try sending from another email address, or [contact a staff member](%{base_url}/about).
 
     email_reject_not_allowed_email:
-      title: "Email Reject Not Allowed Email"
+      title: "Email Reject: Not Allowed Email"
       subject_template: "[%{email_prefix}] Email issue -- Blocked Email"
       text_body_template: |
         We're sorry, but your email message to %{destination} (titled %{former_title}) didn't work.
@@ -3190,7 +3189,7 @@ en:
         Your reply was sent from a blocked email address. Try sending from another email address, or [contact a staff member](%{base_url}/about).
 
     email_reject_inactive_user:
-      title: "Email Reject Inactive User"
+      title: "Email Reject: Inactive User"
       subject_template: "[%{email_prefix}] Email issue -- Inactive User"
       text_body_template: |
         We're sorry, but your email message to %{destination} (titled %{former_title}) didn't work.
@@ -3198,7 +3197,7 @@ en:
         Your account associated with this email address is not activated. Please activate your account before sending emails in.
 
     email_reject_silenced_user:
-      title: "Email Reject Silenced User"
+      title: "Email Reject: Silenced User"
       subject_template: "[%{email_prefix}] Email issue -- Silenced User"
       text_body_template: |
         We're sorry, but your email message to %{destination} (titled %{former_title}) didn't work.
@@ -3206,7 +3205,7 @@ en:
         Your account associated with this email address has been silenced.
 
     email_reject_reply_user_not_matching:
-      title: "Email Reject User Not Matching"
+      title: "Email Reject: User Not Matching"
       subject_template: "[%{email_prefix}] Email issue -- Unexpected Reply Address"
       text_body_template: |
         We're sorry, but your email message to %{destination} (titled %{former_title}) didn't work.
@@ -3214,7 +3213,7 @@ en:
         Your reply was sent from a different email address than the one we expected, so we're not sure if this is the same person. Try sending from another email address, or [contact a staff member](%{base_url}/about).
 
     email_reject_empty:
-      title: "Email Reject Empty"
+      title: "Email Reject: No Content"
       subject_template: "[%{email_prefix}] Email issue -- No Content"
       text_body_template: |
         We're sorry, but your email message to %{destination} (titled %{former_title}) didn't work.
@@ -3224,7 +3223,7 @@ en:
         If you're getting this and you _did_ include a reply, try again with simpler formatting.
 
     email_reject_parsing:
-      title: "Email Reject Parsing"
+      title: "Email Reject: Parsing"
       subject_template: "[%{email_prefix}] Email issue -- Content Unrecognized"
       text_body_template: |
         We're sorry, but your email message to %{destination} (titled %{former_title}) didn't work.
@@ -3232,7 +3231,7 @@ en:
         We couldn't find your reply in the email. **Make sure your reply is at the top of the email** -- we can't process inline replies.
 
     email_reject_invalid_access:
-      title: "Email Reject Invalid Access"
+      title: "Email Reject: Invalid Access"
       subject_template: "[%{email_prefix}] Email issue -- Invalid Access"
       text_body_template: |
         We're sorry, but your email message to %{destination} (titled %{former_title}) didn't work.
@@ -3240,7 +3239,7 @@ en:
         Your account does not have the privileges to post new topics in that category. If you believe this is an error, [contact a staff member](%{base_url}/about).
 
     email_reject_strangers_not_allowed:
-      title: "Email Reject Strangers Not Allowed"
+      title: "Email Reject: Strangers Not Allowed"
       subject_template: "[%{email_prefix}] Email issue -- Invalid Access"
       text_body_template: |
         We're sorry, but your email message to %{destination} (titled %{former_title}) didn't work.
@@ -3248,7 +3247,7 @@ en:
         The category you sent this email to only allows replies from users with valid accounts and known email addresses. If you believe this is an error, [contact a staff member](%{base_url}/about).
 
     email_reject_invalid_post:
-      title: "Email Reject Invalid Post"
+      title: "Email Reject: Invalid Post"
       subject_template: "[%{email_prefix}] Email issue -- Posting error"
       text_body_template: |
         We're sorry, but your email message to %{destination} (titled %{former_title}) didn't work.
@@ -3256,7 +3255,7 @@ en:
         Some possible causes are: complex formatting, message too large, message too small. Please try again, or post via the website if this continues.
 
     email_reject_invalid_post_specified:
-      title: "Email Reject Invalid Post Specified"
+      title: "Email Reject: Invalid Post Specified"
       subject_template: "[%{email_prefix}] Email issue -- Posting error"
       text_body_template: |
         We're sorry, but your email message to %{destination} (titled %{former_title}) didn't work.
@@ -3269,7 +3268,7 @@ en:
       date_invalid: "No post creation date found. Is the e-mail missing a Date: header?"
 
     email_reject_post_too_short:
-      title: "Email Reject Post Too Short"
+      title: "Email Reject: Post Too Short"
       subject_template: "[%{email_prefix}] Email issue -- Post too short"
       text_body_template: |
         We're sorry, but your email message to %{destination} (titled %{former_title}) didn't work.
@@ -3277,7 +3276,7 @@ en:
         To promote more in depth conversations, very short replies are not allowed. Can you please reply with at least %{count} characters? Alternatively, you can like a post via email by replying with "+1".
 
     email_reject_invalid_post_action:
-      title: "Email Reject Invalid Post Action"
+      title: "Email Reject: Invalid Post Action"
       subject_template: "[%{email_prefix}] Email issue -- Invalid Post Action"
       text_body_template: |
         We're sorry, but your email message to %{destination} (titled %{former_title}) didn't work.
@@ -3285,7 +3284,7 @@ en:
         The Post Action was not recognized. Please try again, or post via the website if this continues.
 
     email_reject_reply_key:
-      title: "Email Reject Reply Key"
+      title: "Email Reject: Reply Key"
       subject_template: "[%{email_prefix}] Email issue -- Unknown Reply Key"
       text_body_template: |
         We're sorry, but your email message to %{destination} (titled %{former_title}) didn't work.
@@ -3293,7 +3292,7 @@ en:
         The reply key in the email is invalid or unknown, so we can't figure out what this email is in reply to. [Contact a staff member](%{base_url}/about).
 
     email_reject_bad_destination_address:
-      title: "Email Reject Bad Destination Address"
+      title: "Email Reject: Bad Destination Address"
       subject_template: "[%{email_prefix}] Email issue -- Unknown To: Address"
       text_body_template: |
         We're sorry, but your email message to %{destination} (titled %{former_title}) didn't work.
@@ -3309,7 +3308,7 @@ en:
         Need more help? Reach out to us via the Contact Us details at %{base_url}/about
 
     email_reject_old_destination:
-      title: "Email Reject Old Destination"
+      title: "Email Reject: Old Destination"
       subject_template: "[%{email_prefix}] Email issue -- You are trying to reply to an old notification"
       text_body_template: |
         We're sorry, but your email message to %{destination} (titled %{former_title}) didn't work.
@@ -3317,7 +3316,7 @@ en:
         We only accept replies to original notifications for %{number_of_days} days. Please [visit the topic](%{short_url}) to continue the conversation.
 
     email_reject_topic_not_found:
-      title: "Email Reject Topic Not Found"
+      title: "Email Reject: Topic Not Found"
       subject_template: "[%{email_prefix}] Email issue -- Topic Not Found"
       text_body_template: |
         We're sorry, but your email message to %{destination} (titled %{former_title}) didn't work.
@@ -3325,7 +3324,7 @@ en:
         The topic you are replying to no longer exists -- perhaps it was deleted? If you believe this is an error, [contact a staff member](%{base_url}/about).
 
     email_reject_topic_closed:
-      title: "Email Reject Topic Closed"
+      title: "Email Reject: Topic Closed"
       subject_template: "[%{email_prefix}] Email issue -- Topic Closed"
       text_body_template: |
         We're sorry, but your email message to %{destination} (titled %{former_title}) didn't work.
@@ -3333,7 +3332,7 @@ en:
         The topic you are replying to is currently closed and no longer accepting replies. If you believe this is an error, [contact a staff member](%{base_url}/about).
 
     email_reject_auto_generated:
-      title: "Email Reject Auto Generated"
+      title: "Email Reject: Auto Generated"
       subject_template: "[%{email_prefix}] Email issue -- Auto Generated Reply"
       text_body_template: |
         We're sorry, but your email message to %{destination} (titled %{former_title}) didn't work.
@@ -3341,7 +3340,7 @@ en:
         Your email was marked as "auto generated", which means it was automatically created by a computer instead of being typed by a human; we can't accept those kinds of emails. If you believe this is an error, [contact a staff member](%{base_url}/about).
 
     email_reject_unrecognized_error:
-      title: "Email Reject Unrecognized Error"
+      title: "Email Reject: Unrecognized Error"
       subject_template: "[%{email_prefix}] Email issue -- Unrecognized Error"
       text_body_template: |
         We're sorry, but your email message to %{destination} (titled %{former_title}) didn't work.
@@ -3360,7 +3359,7 @@ en:
         If you believe this is an error, [contact a staff member](%{base_url}/about).
 
     email_reject_reply_not_allowed:
-      title: "Email Reject Reply Not Allowed"
+      title: "Email Reject: Reply Not Allowed"
       subject_template: "[%{email_prefix}] Email issue -- Reply Not Allowed"
       text_body_template: |
         We're sorry, but your email message to %{destination} (titled %{former_title}) didn't work.
@@ -3368,7 +3367,7 @@ en:
         You don't have permissions to reply to the topic. If you believe this is an error, [contact a staff member](%{base_url}/about).
 
     email_reject_reply_to_digest:
-      title: "Email Reject Reply To Summary"
+      title: "Email Reject: Reply To Summary"
       subject_template: "[%{email_prefix}] Email issue -- Reply to Summary"
       text_body_template: |
         We're sorry, but your email message to %{destination} (titled %{former_title}) didn't work.
@@ -3378,7 +3377,7 @@ en:
         If you believe this is an error, [contact a staff member](%{base_url}/about).
 
     email_reject_too_many_recipients:
-      title: "Email Reject Too Many Recipients"
+      title: "Email Reject: Too Many Recipients"
       subject_template: "[%{email_prefix}] Email issue -- Too Many Recipients"
       text_body_template: |
         We're sorry, but your email message to %{destination} (titled %{former_title}) didn't work.
@@ -3627,7 +3626,7 @@ en:
       %{topic_url}
 
     user_invited_to_private_message_pm_group:
-      title: "User Invited Group to PM"
+      title: "Invited to PM (Group)"
       subject_template: "[%{email_prefix}] %{username} invited @%{group_name} to a message '%{topic_title}'"
       text_body_template: |
         %{header_instructions}
@@ -3637,7 +3636,7 @@ en:
         %{respond_instructions}
 
     user_invited_to_private_message_pm:
-      title: "User Invited to PM"
+      title: "Invited to PM (User)"
       subject_template: "[%{email_prefix}] %{username} invited you to a message '%{topic_title}'"
       text_body_template: |
         %{header_instructions}
@@ -3647,7 +3646,7 @@ en:
         %{respond_instructions}
 
     user_invited_to_private_message_pm_staged:
-      title: "User Invited to PM Staged"
+      title: "Invited to PM (Staged User)"
       subject_template: "[%{email_prefix}] %{username} invited you to a message '%{topic_title}'"
       text_body_template: |
         %{header_instructions}
@@ -3657,7 +3656,7 @@ en:
         %{respond_instructions}
 
     user_invited_to_topic:
-      title: "User Invited to Topic"
+      title: "Invited to Topic (User)"
       subject_template: "[%{email_prefix}] %{username} invited you to '%{topic_title}'"
       text_body_template: |
         %{header_instructions}
@@ -3667,7 +3666,7 @@ en:
         %{respond_instructions}
 
     user_replied:
-      title: "User Replied"
+      title: "User Replied to Topic"
       subject_template: "[%{email_prefix}] %{topic_title}"
       text_body_template: |
         %{header_instructions}
@@ -3679,7 +3678,7 @@ en:
         %{respond_instructions}
 
     user_replied_pm:
-      title: "User Replied PM"
+      title: "User Replied to PM"
       subject_template: "[%{email_prefix}] [PM] %{topic_title}"
       text_body_template: |
         %{header_instructions}
