@@ -2158,6 +2158,9 @@ backups:
     default: false
     hidden: true
     client: true
+  experimental_backup_version:
+    default: false
+    hidden: true
 
 search:
   use_pg_headlines_for_excerpt:

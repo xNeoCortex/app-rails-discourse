@@ -20,6 +20,13 @@ fork do
     ).run
   end
 
+  def backup_v2
+    user_id, opts = parse_params
+    logger = BackupRestoreV2::Logger::DefaultLogger.new(user_id, opts[:client_id], "backup")
+    backuper = BackupRestoreV2::Backuper.new(user_id, logger, opts)
+    backuper.run
+  end
+
   def parse_params
     user_id = ARGV[1].to_i
     opts = JSON.parse(ARGV[2], symbolize_names: true)
@@ -31,6 +38,8 @@ fork do
     backup
   when "restore"
     restore
+  when "backup_v2"
+    backup_v2
   else
     raise "Unknown argument: #{ARGV[0]}"
   end

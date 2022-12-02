@@ -109,6 +109,14 @@ class Plugin::Instance
 
   delegate :name, to: :metadata
 
+  def git_version
+    plugin_root = File.dirname(path)
+    git_dir = File.join(plugin_root, ".git")
+    return nil if !Dir.exist?(git_dir)
+
+    Discourse.try_git("git --git-dir #{git_dir} rev-parse HEAD", nil)
+  end
+
   def add_to_serializer(serializer, attr, define_include_method = true, &block)
     reloadable_patch do |plugin|
       base =

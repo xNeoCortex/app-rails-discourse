@@ -262,7 +262,6 @@ if ENV["IMPORT"] == "1"
 end
 
 gem "web-push"
-gem "colored2", require: false
 gem "maxminddb"
 
 gem "rails_failover", require: false
@@ -279,3 +278,9 @@ gem "webrick", require: false
 
 # Workaround until Ruby ships with cgi version 0.3.6 or higher.
 gem "cgi", ">= 0.3.6", require: false
+
+# used by backup and restore
+gem "colored2", require: false
+gem "mini_tarball", require: false
+gem "ruby-progressbar", require: false
+gem "tty-spinner", require: false

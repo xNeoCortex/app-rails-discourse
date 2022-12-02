@@ -12,6 +12,7 @@ class FakeS3
       )
     end
     s3.stub_s3_helper
+    s3.stub_file_downloader
     s3
   end
 
@@ -55,6 +56,11 @@ class FakeS3
     end
   end
 
+  def stub_file_downloader
+    @file_downloader = FakeS3FileDownloader.new(@buckets)
+    Aws::S3::FileDownloader.stubs(:new).returns(@file_downloader)
+  end
+
   def operation_called?(name)
     @operations.any? do |operation|
       operation[:name] == name && (block_given? ? yield(operation) : true)
@@ -78,7 +84,8 @@ class FakeS3
 
   def calculate_etag(context)
     # simple, reproducible ETag calculation
-    Digest::MD5.hexdigest(context.params.to_json)
+    content = context.params[:body].presence || context.params.to_json
+    Digest::MD5.hexdigest(content)
   end
 
   def stub_methods
@@ -105,7 +112,7 @@ class FakeS3
         log_operation(context)
 
         if object = find_object(context.params)
-          { content_length: object[:size], body: "" }
+          { content_length: object[:size], body: object[:body] }
         else
           { status_code: 404, headers: {}, body: "" }
         end
@@ -175,6 +182,8 @@ class FakeS3Bucket
   end
 
   def put_object(obj)
+    obj[:body] = File.binread(obj[:body].path) if obj[:body]&.is_a?(File)
+
     @objects[obj[:key]] = obj
   end
 
@@ -184,5 +193,18 @@ class FakeS3Bucket
 
   def find_object(key)
     @objects[key]
+  end
+end
+
+class FakeS3FileDownloader
+  def initialize(buckets)
+    @buckets = buckets
+  end
+
+  def download(destination, options = {})
+    bucket = options[:bucket]
+    key = options[:key]
+    object = @buckets[bucket].find_object(key)
+    File.binwrite(destination, object[:body])
   end
 end

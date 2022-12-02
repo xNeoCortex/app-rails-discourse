@@ -39,7 +39,12 @@ class Admin::BackupsController < Admin::AdminController
       with_uploads: params.fetch(:with_uploads) == "true",
       client_id: params[:client_id],
     }
-    BackupRestore.backup!(current_user.id, opts)
+
+    if SiteSetting.experimental_backup_version
+      BackupRestoreV2.backup!(current_user.id, opts)
+    else
+      BackupRestore.backup!(current_user.id, opts)
+    end
   rescue BackupRestore::OperationRunningError
     render_error("backup.operation_already_running")
   else

@@ -777,17 +777,14 @@ module Discourse
   end
 
   def self.try_git(git_cmd, default_value)
-    version_value = false
-
     begin
-      version_value = `#{git_cmd}`.strip
+      value = `#{git_cmd}`.strip
     rescue StandardError
-      version_value = default_value
+      value = default_value
     end
 
-    version_value = default_value if version_value.empty?
-
-    version_value
+    value = default_value if value.blank?
+    value
   end
 
   # Either returns the site_contact_username user or the first admin.

@@ -49,6 +49,7 @@ module BackupRestore
       ActiveRecord::Base.connection.drop_schema(BACKUP_SCHEMA) if backup_schema_dropable?
     end
 
+    # TODO Reuse from BackupRestoreV2::Database
     def self.core_migration_files
       Dir[Rails.root.join(Migration::SafeMigrate.post_migration_path, "**/*.rb")] +
         Dir[Rails.root.join("db/migrate/*.rb")]

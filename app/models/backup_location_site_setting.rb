@@ -15,6 +15,10 @@ class BackupLocationSiteSetting < EnumSiteSetting
     ]
   end
 
+  def self.find_by_value(val)
+    values.find { |v| v[:value] == val }
+  end
+
   def self.translate_names?
     true
   end
