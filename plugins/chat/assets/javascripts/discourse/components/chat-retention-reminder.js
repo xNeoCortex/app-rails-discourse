@@ -32,7 +32,7 @@ export default Component.extend({
       days = this.siteSettings.chat_dm_retention_days;
       translationKey = "chat.retention_reminders.dm";
     }
-    return I18n.t(translationKey, { days });
+    return I18n.t(translationKey, { count: days });
   },
 
   @discourseComputed("chatChannel.chatable_type")

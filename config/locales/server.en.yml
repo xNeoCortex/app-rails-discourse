@@ -544,7 +544,9 @@ en:
 
     dominating_topic: You’ve posted a lot in this topic! Consider giving others an opportunity to reply here and discuss things with each other as well.
 
-    get_a_room: You’ve replied to @%{reply_username} %{count} times, did you know you could send them a personal message instead?
+    get_a_room:
+      one: "You’ve replied to @%{reply_username} once, did you know you could send them a personal message instead?"
+      other: "You’ve replied to @%{reply_username} %{count} times, did you know you could send them a personal message instead?"
 
     too_many_replies: |
       ### You have reached the reply limit for this topic
@@ -707,7 +709,9 @@ en:
       topic_exists:
         one: "Can't delete this category because it has %{count} topic. Oldest topic is %{topic_link}."
         other: "Can't delete this category because it has %{count} topics. Oldest topic is %{topic_link}."
-      topic_exists_no_oldest: "Can't delete this category because topic count is %{count}."
+      topic_exists_no_oldest:
+        one: "Can't delete this category because it has %{count} topic."
+        other: "Can't delete this category because it has %{count} topics."
     uncategorized_description: "Topics that don't need a category, or don't fit into any other existing category."
   trust_levels:
     admin: "Admin"
@@ -2444,7 +2448,9 @@ en:
         regex_invalid: "The regular expression is invalid: %{error}"
         leading_trailing_slash: "The regular expression must not start and end with a slash."
       unicode_usernames_avatars: "The internal system avatars do not support Unicode usernames."
-      list_value_count: "The list must contain exactly %{count} values."
+      list_value_count:
+        one: "The list must contain exactly %{count} value."
+        other: "The list must contain exactly %{count} values."
       markdown_linkify_tlds: "You cannot include a value of '*'."
       google_oauth2_hd_groups: "You must configure all 'google oauth2 hd' settings before enabling this setting."
       search_tokenize_chinese_enabled: "You must disable 'search_tokenize_chinese' before enabling this setting."
@@ -3275,10 +3281,16 @@ en:
     email_reject_post_too_short:
       title: "Email Reject Post Too Short"
       subject_template: "[%{email_prefix}] Email issue -- Post too short"
-      text_body_template: |
-        We're sorry, but your email message to %{destination} (titled %{former_title}) didn't work.
+      text_body_template:
+        one: |
+          We're sorry, but your email message to %{destination} (titled %{former_title}) didn't work.
 
-        To promote more in depth conversations, very short replies are not allowed. Can you please reply with at least %{count} characters? Alternatively, you can like a post via email by replying with "+1".
+          To promote more in depth conversations, very short replies are not allowed. Can you please reply with at least %{count} character? Alternatively, you can like a post via email by replying with "+1".
+
+        other: |
+          We're sorry, but your email message to %{destination} (titled %{former_title}) didn't work.
+
+          To promote more in depth conversations, very short replies are not allowed. Can you please reply with at least %{count} characters? Alternatively, you can like a post via email by replying with "+1".
 
     email_reject_invalid_post_action:
       title: "Email Reject Invalid Post Action"
@@ -4613,7 +4625,9 @@ en:
     mass_award:
       errors:
         invalid_csv: We encountered an error on line %{line_number}. Please confirm the CSV has one email per line.
-        too_many_csv_entries: Too many entries in the CSV file. Please provide a CSV file with no more than %{count} entries.
+        too_many_csv_entries:
+          one: Too many entries in the CSV file. Please provide a CSV file with no more than %{count} entry.
+          other: Too many entries in the CSV file. Please provide a CSV file with no more than %{count} entries.
         badge_disabled: Please enable the %{badge_name} badge first.
         cant_grant_multiple_times: Can't grant the %{badge_name} badge multiple times to a single user.
     editor:

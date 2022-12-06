@@ -28,7 +28,7 @@ module(
       async test(assert) {
         assert.equal(
           query(".chat-retention-reminder-text").innerText.trim(),
-          I18n.t("chat.retention_reminders.public", { days: 100 })
+          I18n.t("chat.retention_reminders.public", { count: 100 })
         );
       },
     });

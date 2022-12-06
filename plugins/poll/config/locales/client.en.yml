@@ -76,7 +76,9 @@ en:
 
       breakdown:
         title: "Poll results"
-        votes: "%{count} votes"
+        votes:
+          one: "%{count} vote"
+          other: "%{count} votes"
         breakdown: "Breakdown"
         percentage: "Percentage"
         count: "Count"
@@ -91,7 +93,9 @@ en:
         insert: Insert Poll
         help:
           options_min_count: Enter at least 1 option.
-          options_max_count: Enter at most %{count} options.
+          options_max_count:
+            one: Enter at most %{count} option.
+            other: Enter at most %{count} options.
           invalid_min_value: Minimum value must be at least 1.
           invalid_max_value: Maximum value must be at least 1, but less than or equal with the number of options.
           invalid_values: Minimum value must be smaller than the maximum value.

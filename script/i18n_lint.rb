@@ -33,10 +33,17 @@ class LocaleFileValidator
     wrong_pluralization_keys: "Pluralized strings must have only the sub-keys 'one' and 'other'.\nThe following keys have missing or additional keys:",
     invalid_one_keys: "The following keys contain the number 1 instead of the interpolation key %{count}:",
     invalid_message_format_one_key: "The following keys use 'one {1 foo}' instead of the generic 'one {# foo}':",
+    missing_pluralization: "The following keys use %{count} without pluralization.\nSplit the key into `one` and `other` or add it to the allow list in `script/i18n_lint.rb`:",
   }
 
   PLURALIZATION_KEYS = ['zero', 'one', 'two', 'few', 'many', 'other']
   ENGLISH_KEYS = ['one', 'other']
+
+  COUNT_WITHOUT_PLURALIZATION_ALLOW_LIST = [
+    "errors.messages.",
+    "activemodel.errors.messages.",
+    "activerecord.errors.messages.",
+  ]
 
   def initialize(filename)
     @filename = filename
@@ -73,7 +80,7 @@ class LocaleFileValidator
       if Hash === value
         each_translation(value, current_key, &block)
       else
-        yield(current_key, value.to_s)
+        yield(current_key, value.to_s, key)
       end
     end
   end
@@ -83,22 +90,29 @@ class LocaleFileValidator
     @errors[:invalid_relative_image_sources] = []
     @errors[:invalid_interpolation_key_format] = []
     @errors[:invalid_message_format_one_key] = []
+    @errors[:missing_pluralization] = []
 
-    each_translation(yaml) do |key, value|
+    each_translation(yaml) do |full_key, value, last_key_part|
       if value.match?(/href\s*=\s*["']\/[^\/]|\]\(\/[^\/]/i)
-        @errors[:invalid_relative_links] << key
+        @errors[:invalid_relative_links] << full_key
       end
 
       if value.match?(/src\s*=\s*["']\/[^\/]/i)
-        @errors[:invalid_relative_image_sources] << key
+        @errors[:invalid_relative_image_sources] << full_key
       end
 
-      if value.match?(/{{.+?}}/) && !key.end_with?("_MF")
-        @errors[:invalid_interpolation_key_format] << key
+      if value.match?(/{{.+?}}/) && !full_key.end_with?("_MF")
+        @errors[:invalid_interpolation_key_format] << full_key
       end
 
-      if key.end_with?("_MF") && value.match?(/one {.*?1.*?}/)
-        @errors[:invalid_message_format_one_key] << key
+      if full_key.end_with?("_MF") && value.match?(/one {.*?1.*?}/)
+        @errors[:invalid_message_format_one_key] << full_key
+      end
+
+      if value.include?("%{count}") && !ENGLISH_KEYS.include?(last_key_part) &&
+        COUNT_WITHOUT_PLURALIZATION_ALLOW_LIST.none? { |k| full_key.start_with?(k) }
+
+        @errors[:missing_pluralization] << full_key
       end
     end
   end

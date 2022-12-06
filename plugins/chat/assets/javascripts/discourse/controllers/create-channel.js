@@ -91,16 +91,29 @@ export default class CreateChannelController extends Controller.extend(
     const allowedGroups = catPermissions.allowed_groups;
 
     if (catPermissions.private) {
-      const warningTranslationKey =
-        allowedGroups.length < 3 ? "warning_groups" : "warning_multiple_groups";
+      let warningTranslationKey;
+
+      switch (allowedGroups.length) {
+        case 1:
+          warningTranslationKey =
+            "chat.create_channel.auto_join_users.warning_one_group";
+          break;
+        case 2:
+          warningTranslationKey =
+            "chat.create_channel.auto_join_users.warning_two_groups";
+          break;
+        default:
+          warningTranslationKey =
+            "chat.create_channel.auto_join_users.warning_multiple_groups";
+          break;
+      }
 
       this.set(
         "autoJoinWarning",
-        I18n.t(`chat.create_channel.auto_join_users.${warningTranslationKey}`, {
-          members_count: catPermissions.members_count,
+        I18n.t(warningTranslationKey, {
+          count: catPermissions.members_count,
           group: escapeExpression(allowedGroups[0]),
           group_2: escapeExpression(allowedGroups[1]),
-          count: allowedGroups.length,
         })
       );
     } else {
