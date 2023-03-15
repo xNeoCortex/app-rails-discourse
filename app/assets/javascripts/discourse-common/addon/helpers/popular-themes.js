@@ -45,7 +45,7 @@ export const POPULAR_THEMES = [
     name: "Custom Header Links",
     value: "https://github.com/discourse/discourse-custom-header-links",
     preview:
-      "https://theme-creator.discourse.org/theme/Johani/custom-header-links",
+      "https://discourse.theme-creator.io/theme/awesomerobot/custom-header-links",
     description: "Easily add custom text-based links to the header.",
     meta_url: "https://meta.discourse.org/t/custom-header-links/90588",
     component: true,
