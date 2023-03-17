@@ -15,7 +15,7 @@ require "mysql2"
 require File.expand_path(File.dirname(__FILE__) + "/base.rb")
 
 class ImportScripts::DiscuzX < ImportScripts::Base
-  DISCUZX_DB = "ultrax"
+  DISCUZX_DB = "db_name"
   DB_TABLE_PREFIX = "pre_"
   BATCH_SIZE = 1000
   ORIGINAL_SITE_PREFIX = "oldsite.example.com/forums" # without http(s)://
@@ -26,6 +26,8 @@ class ImportScripts::DiscuzX < ImportScripts::Base
   AVATAR_DIR = "/uc_server/data/avatar"
   ATTACHMENT_DIR = "/data/attachment/forum"
   AUTHORIZED_EXTENSIONS = %w[jpg jpeg png gif zip rar pdf]
+  IMPORT_UPLOADS = false
+  IMPORT_PASSWORDS = false
 
   def initialize
     super
@@ -35,6 +37,7 @@ class ImportScripts::DiscuzX < ImportScripts::Base
         host: "localhost",
         username: "root",
         #password: "password",
+        port: "3306",
         database: DISCUZX_DB,
       )
     @first_post_id_by_topic_id = {}
@@ -58,7 +61,7 @@ class ImportScripts::DiscuzX < ImportScripts::Base
     import_categories
     import_posts
     import_private_messages
-    import_attachments
+    import_attachments if IMPORT_UPLOADS
   end
 
   # add the prefix to the table name
@@ -115,8 +118,8 @@ class ImportScripts::DiscuzX < ImportScripts::Base
     @duplicated_email = {}
     results =
       mysql_query(
-        "select a.uid uid, b.uid import_id from pre_common_member a
-        join (select uid, email from pre_common_member group by email having count(email) > 1 order by uid asc) b USING(email)
+        "select a.uid uid, b.uid import_id from #{table_name "common_member"} a
+        join (select uid, email from #{table_name "common_member"} group by email having count(email) > 1 order by uid asc) b USING(email)
         where a.uid != b.uid",
       )
 
@@ -176,7 +179,6 @@ class ImportScripts::DiscuzX < ImportScripts::Base
           email: user["email"],
           username: user["username"],
           name: first_exists(user["realname"], user["customstatus"], user["username"]),
-          import_pass: user["password_hash"],
           active: true,
           salt: user["salt"],
           # TODO: title: user['customstatus'], # move custom title to name since discourse can't let user custom title https://meta.discourse.org/t/let-users-custom-their-title/37626
@@ -231,7 +233,8 @@ class ImportScripts::DiscuzX < ImportScripts::Base
             ),
           post_create_action:
             lambda do |newmember|
-              if user["avatar_exists"] == (1) && newmember.uploaded_avatar_id.blank?
+              if user["avatar_exists"] == (1) && newmember.uploaded_avatar_id.blank? &&
+                   IMPORT_UPLOADS
                 path, filename = discuzx_avatar_fullpath(user["id"])
                 if path
                   begin
@@ -306,10 +309,6 @@ class ImportScripts::DiscuzX < ImportScripts::Base
                 end
               end
 
-              # we don't send email to the unconfirmed user
-              if newmember.email_digests
-                newmember.update(email_digests: user["email_confirmed"] == 1)
-              end
               if !newmember.name.blank? && newmember.name == (newmember.username)
                 newmember.update(name: "")
               end
@@ -471,7 +470,7 @@ class ImportScripts::DiscuzX < ImportScripts::Base
               WHERE tid = #{m["topic_id"]}
               ORDER BY displayorder",
               )
-            if results.empty?
+            if results.count == 0
               puts "WARNING: can't find poll options for topic #{m["topic_id"]}, skip poll"
             else
               mapped[
