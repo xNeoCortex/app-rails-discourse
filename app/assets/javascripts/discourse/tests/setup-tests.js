@@ -1,4 +1,5 @@
 /* eslint-disable simple-import-sort/imports */
+import Application from "../app";
 import "./loader-shims";
 /* eslint-enable simple-import-sort/imports */
 
@@ -45,7 +46,6 @@ import deprecated from "discourse-common/lib/deprecated";
 import { setDefaultOwner } from "discourse-common/lib/get-owner";
 import { setupS3CDN, setupURL } from "discourse-common/lib/get-url";
 import { buildResolver } from "discourse-common/resolver";
-import Application from "../app";
 import { loadSprites } from "../lib/svg-sprite-loader";
 
 const Plugin = $.fn.modal;
