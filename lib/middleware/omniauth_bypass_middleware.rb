@@ -8,7 +8,7 @@ class Middleware::OmniauthBypassMiddleware
   end
 
   def call(env)
-    @app.call(env) unless env["PATH_INFO"].start_with?("/auth")
+    return @app.call(env) unless env["PATH_INFO"].start_with?("/auth")
 
     # When only one provider is enabled, assume it can be completely trusted, and allow GET requests
     only_one_provider =
