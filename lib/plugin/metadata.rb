@@ -74,6 +74,7 @@ class Plugin::Metadata
         discourse-sitemap
         discourse-solved
         discourse-staff-alias
+        discourse-steam-login
         discourse-subscriptions
         discourse-tag-by-group
         discourse-teambuild
