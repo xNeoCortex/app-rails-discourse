@@ -27,7 +27,7 @@ OmniAuth.config.on_failure do |env|
   # explicit fail! call, or a rescued exception. But, this check is a pretty good guess:
   is_rescued_error = exception&.message&.to_sym == env["omniauth.error.type"]
 
-  return OmniAuth::FailureEndpoint.call(env) if !is_rescued_error # let the default behavior handle it
+  next OmniAuth::FailureEndpoint.call(env) if !is_rescued_error # let the default behavior handle it
 
   case exception
   when OAuth::Unauthorized
