@@ -67,6 +67,7 @@ class Plugin::Metadata
         discourse-restricted-replies
         discourse-rss-polling
         discourse-salesforce
+        discourse-saml
         discourse-saved-searches
         discourse-shared-edits
         discourse-signatures
