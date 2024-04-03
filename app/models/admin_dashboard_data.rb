@@ -3,8 +3,6 @@
 class AdminDashboardData
   include StatsCacheable
 
-  cattr_reader :problem_messages
-
   # kept for backward compatibility
   GLOBAL_REPORTS ||= []
 
@@ -25,10 +23,7 @@ class AdminDashboardData
 
   def problems
     problems = []
-    self.class.problem_messages.each do |i18n_key|
-      message = self.class.problem_message_check(i18n_key)
-      problems << ProblemCheck::Problem.new(message) if message.present?
-    end
+
     problems.concat(ProblemCheck.realtime.flat_map { |c| c.call(@opts).map(&:to_h) })
 
     problems += self.class.load_found_scheduled_check_problems
@@ -122,34 +117,5 @@ class AdminDashboardData
 
   def self.fetch_problems(opts = {})
     new(opts).problems
-  end
-
-  def self.problem_message_check(i18n_key)
-    if Discourse.redis.get(problem_message_key(i18n_key))
-      I18n.t(i18n_key, base_path: Discourse.base_path)
-    else
-      nil
-    end
-  end
-
-  ##
-  # Arbitrary messages cannot be added here, they must already be defined
-  # in the @problem_messages array which is defined in reset_problem_checks.
-  # The array is iterated over and each key that exists in redis will be added
-  # to the final problems output in #problems.
-  def self.add_problem_message(i18n_key, expire_seconds = nil)
-    if expire_seconds.to_i > 0
-      Discourse.redis.setex problem_message_key(i18n_key), expire_seconds.to_i, 1
-    else
-      Discourse.redis.set problem_message_key(i18n_key), 1
-    end
-  end
-
-  def self.clear_problem_message(i18n_key)
-    Discourse.redis.del problem_message_key(i18n_key)
-  end
-
-  def self.problem_message_key(i18n_key)
-    "#{PROBLEM_MESSAGE_PREFIX}#{i18n_key}"
   end
 end

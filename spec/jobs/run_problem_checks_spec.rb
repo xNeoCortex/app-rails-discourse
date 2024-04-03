@@ -18,9 +18,6 @@ RSpec.describe Jobs::RunProblemChecks do
       &example
     )
 
-    Discourse.redis.flushdb
-    AdminDashboardData.reset_problem_checks
-
     ProblemCheck.send(:remove_const, "ScheduledCheck")
     ProblemCheck.send(:remove_const, "NonScheduledCheck")
   end

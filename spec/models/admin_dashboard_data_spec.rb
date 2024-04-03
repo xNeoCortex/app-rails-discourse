@@ -1,28 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe AdminDashboardData do
-  after do
-    AdminDashboardData.reset_problem_checks
-    Discourse.redis.flushdb
-  end
-
-  describe "#fetch_problems" do
-    describe "adding problem messages" do
-      it "adds the message and returns it when the problems are fetched" do
-        AdminDashboardData.add_problem_message("dashboard.bad_favicon_url")
-        problems = AdminDashboardData.fetch_problems.map(&:to_s)
-        expect(problems).to include(
-          I18n.t("dashboard.bad_favicon_url", { base_path: Discourse.base_path }),
-        )
-      end
-
-      it "does not allow adding of arbitrary problem messages, they must exist in AdminDashboardData.problem_messages" do
-        AdminDashboardData.add_problem_message("errors.messages.invalid")
-        problems = AdminDashboardData.fetch_problems.map(&:to_s)
-        expect(problems).not_to include(I18n.t("errors.messages.invalid"))
-      end
-    end
-  end
+  after { Discourse.redis.flushdb }
 
   describe "adding scheduled checks" do
     it "does not add duplicate problems with the same identifier" do
@@ -57,29 +36,5 @@ RSpec.describe AdminDashboardData do
 
   describe "stats cache" do
     include_examples "stats cacheable"
-  end
-
-  describe "#problem_message_check" do
-    let(:key) { AdminDashboardData.problem_messages.first }
-
-    after { described_class.clear_problem_message(key) }
-
-    it "returns nil if message has not been added" do
-      expect(described_class.problem_message_check(key)).to be_nil
-    end
-
-    it "returns a message if it was added" do
-      described_class.add_problem_message(key)
-      expect(described_class.problem_message_check(key)).to eq(
-        I18n.t(key, base_path: Discourse.base_path),
-      )
-    end
-
-    it "returns a message if it was added with an expiry" do
-      described_class.add_problem_message(key, 300)
-      expect(described_class.problem_message_check(key)).to eq(
-        I18n.t(key, base_path: Discourse.base_path),
-      )
-    end
   end
 end
