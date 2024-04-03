@@ -33,6 +33,7 @@ class ProblemCheck
   # Note: This list must come after the `config_accessor` declarations.
   #
   CORE_PROBLEM_CHECKS = [
+    ProblemCheck::BadFaviconUrl,
     ProblemCheck::EmailPollingErroredRecently,
     ProblemCheck::FacebookConfig,
     ProblemCheck::FailingEmails,
