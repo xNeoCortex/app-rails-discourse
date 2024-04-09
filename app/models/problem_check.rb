@@ -119,7 +119,7 @@ class ProblemCheck
     new(data).call
   end
 
-  def self.run(data = {}, &)
+  def self.run_all(data = {}, &)
     new(data).run(&)
   end
 
