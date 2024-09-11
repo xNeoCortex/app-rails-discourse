@@ -453,6 +453,16 @@ class UserNotifications < ActionMailer::Base
     notification_email(user, opts)
   end
 
+  def send_duck_meme(user)
+    build_email(
+      user.email,
+      template: "user_notifications.send_duck_meme",
+      locale: user_locale(user),
+      image_url:
+        "https://media.tenor.com/images/2b1a3e0c7d8b4e8f9c8f9c8f9c8f9c8f/tenor.gif",
+    )
+  end
+
   protected
 
   def user_locale(user)
