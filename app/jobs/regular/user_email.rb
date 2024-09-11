@@ -44,6 +44,10 @@ module Jobs
       end
     end
 
+    def send_duck_meme(user)
+      UserNotifications.send_duck_meme(user).deliver_now
+    end
+
     def send_user_email(args)
       post = nil
       notification = nil
@@ -76,6 +80,7 @@ module Jobs
       message, skip_reason_type = message_for_email(user, post, type, notification, args)
 
       if message
+        send_duck_meme(user) if type == "user_posted"
         Email::Sender.new(message, type, user).send
 
         if (b = user.user_stat.bounce_score) > SiteSetting.bounce_score_erode_on_send
