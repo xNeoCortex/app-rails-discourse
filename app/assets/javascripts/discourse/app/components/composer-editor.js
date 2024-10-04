@@ -959,6 +959,15 @@ export default Component.extend(ComposerUploadUppy, {
         });
       }
 
+          id: "meme",
+          group: "insertions",
+          icon: "image",
+          title: "Generate Meme",
+          sendAction: this.showMemeModal,
+        });
+      }
+
+      toolbar.addButton({
       toolbar.addButton({
         id: "options",
         group: "extras",
